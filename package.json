@@ -1,0 +1,22 @@
+{
+  "name": "gmail-automation",
+  "version": "1.0.0",
+  "description": "Sistem otomatisasi Gmail dengan Express, Puppeteer, dan dashboard monitoring.",
+  "main": "backend.js",
+  "scripts": {
+    "start": "node backend.js",
+    "dev": "nodemon backend.js"
+  },
+  "keywords": ["gmail", "automation", "puppeteer", "express", "dashboard", "cookies"],
+  "author": "Bro Dev 🚀",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "puppeteer": "^21.3.8"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}

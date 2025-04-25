@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tambah Akun</title>
+</head>
+<body>
+  <h2>Tambah Akun Gmail</h2>
+  <form id="addForm">
+    <input type="text" name="name" placeholder="Nama" required><br>
+    <input type="email" name="email" placeholder="Email" required><br>
+    <button type="submit">Tambah</button>
+  </form>
+
+  <h3>List Akun</h3>
+  <ul id="akunList"></ul>
+
+  <script>
+    const form = document.getElementById('addForm');
+    const list = document.getElementById('akunList');
+
+    async function refreshList() {
+      const res = await fetch('/api/accounts');
+      const data = await res.json();
+      list.innerHTML = data.map(a => `<li>${a.name} - ${a.email}</li>`).join('');
+    }
+
+    form.onsubmit = async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const body = JSON.stringify(Object.fromEntries(formData));
+      const res = await fetch('/api/accounts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body
+      });
+      if (res.ok) {
+        alert('✅ Akun berhasil ditambahkan!');
+        form.reset();
+        refreshList();
+      } else {
+        alert('❌ Gagal tambah akun: ' + await res.text());
+      }
+    };
+
+    refreshList();
+  </script>
+</body>
+</html>
